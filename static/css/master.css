@@ -1,0 +1,43 @@
+html{
+  font-family: 'ReadinessRegular';
+}
+
+.bg{
+  background-image: url("https://cdn.pixabay.com/photo/2015/09/06/01/03/coffee-beans-926837_1280.jpg");
+  background: center contain no-repeat;
+}
+
+p{
+  background-color: #E3D2B1;
+  padding: 1em;
+  font-family: 'ReadinessRegular'
+}
+
+.jumbotron{
+  background-color: #E3D2B1;
+}
+
+#lorem{
+  background-color: #E3D2B1;
+}
+
+.navbar {
+  background-color: #2a1610;
+  color: #E3D2B1 !important;
+}
+
+.navbar-custom{
+  color: #E3D2B1 !important;
+}
+
+.btn{
+  margin-bottom: 2em;
+}
+
+.navbar-toggler-icon{
+  color: #E3D2B1;
+}
+
+body{
+  font-family: 'ReadinessRegular'
+}

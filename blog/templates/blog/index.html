@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<a href="{% url 'article_create' %}">New article</a>
+{% endif %}
+<div class="container-fluid" id='lorem'>
+{% for article in article_list %}
+  <h1><a href="{% url 'article_detail' pk=article.pk slug=article.slug %}">{{ article.title }}</a></h1>
+    <p>{{ article.body }}</p>
+{% endfor %}
+
+</div>
+
+
+<!-- lorem ipsum paragraphs -->
+<div id="lorem" class="d-flex flex-row">
+  <p>Variety affogato, trifecta white, robusta mazagran kopi-luwak crema americano
+    body french press latte, turkish, bar seasonal flavour plunger pot cultivar
+    frappuccino arabica aroma shop cortado chicory. Aftertaste, chicory body sweet
+    robusta, french press that sweet, con panna, to go breve dripper cup, body,
+    americano extra coffee, to go bar ristretto flavour spoon. Coffee cortado,
+    saucer, froth extraction single origin, decaffeinated mocha filter, cultivar
+    doppio est percolator extra cortado caffeine. Beans, cappuccino, as dark crema
+    iced est, cortado, con panna sit medium barista foam black. That lungo extraction
+    mocha con panna that, roast cortado body, dripper, steamed sweet extra, fair trade
+    a bar doppio mug froth ristretto. Iced as single shot foam affogato siphon
+    decaffeinated crema, foam qui brewed breve java and as decaffeinated.</p><br>
+
+  <p>Half and half cup viennese variety single shot affogato, blue mountain fair
+    trade acerbic caffeine decaffeinated sweet saucer aroma half and half whipped
+    qui mug so frappuccino. Irish cup so, barista spoon to go aftertaste roast,
+    whipped breve variety galão, instant, crema café au lait body, café au lait
+    black, qui extraction robusta aromatic to go body. Galão, carajillo,
+    percolator trifecta, wings mocha as, lungo, viennese sit, ristretto, barista
+    aftertaste roast, so, id saucer sugar extra doppio black. Froth
+    caramelization café au lait frappuccino macchiato single shot barista french
+    press trifecta single shot saucer so whipped in frappuccino lungo cappuccino
+    grounds. Macchiato brewed half and half milk, beans mazagran to go,
+    ristretto plunger pot variety, id half and half plunger pot and siphon.
+    Black saucer, sit aged espresso and spoon a foam cappuccino seasonal mocha
+    con panna.</p>
+</div>
+
+
+<!-- Grids/thumbnails -->
+<div class="container">
+  <style media="screen">
+    .col{
+      margin-bottom: 2em;
+    }
+  </style>
+  <div class="row">
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/90V03Q5Y60.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/04LDEYRW59.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/O83SF2RB6D.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/5JVPSVP7EI.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/C5Y10KIIHA.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+      <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/YSSFRY5B25.jpg"
+      class="img-thumbnail" alt="">
+    </div>
+  </div>
+</div>
+{% endblock content %}
