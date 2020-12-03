@@ -11,17 +11,14 @@ from blog.forms import CommentForm, ArticleForm
 
 
 class ArticleList(ListView):
-    """
-    Displays all articles, with the newest at the top.
-    """
+    """Displays all articles, with the newest at the top."""
     queryset = Article.objects.order_by('-date_posted')
     template_name = 'blog/index.html'
     ## # TODO: Paginate
 
+
 class ArticleCreateView(CreateView, LoginRequiredMixin):
-    """
-    Creates a new article with the logged-in user as the default author.
-    """
+    """Creates a new article with the logged-in user as the default author."""
     model = Article
     fields = ['title','body', 'image']
     template_name_suffix = '_create_form'
@@ -32,7 +29,15 @@ class ArticleCreateView(CreateView, LoginRequiredMixin):
         self.object.save()
         return super().form_valid(form)
 
+
 def article_detail(request, pk, slug):
+    """Displays a detailed view of an article and its comments, and allows an
+    unauthenticated user to post a comment.
+
+    Keyword arguments:
+    pk -- the primary key of the article object
+    slug -- the slug of the article object
+    """
     template_name = 'blog/article_detail.html'
     article = get_object_or_404(Article, pk=pk)
     comments = article.comments.filter(active=True)
@@ -59,8 +64,15 @@ def article_detail(request, pk, slug):
                                            'comment_form': comment_form,
                                            'num_comments': num_comments,})
 
+
 @login_required
 def update_article(request, pk, slug):
+    """Allows an authenticated user to update the chosen article.
+
+    Keyword arguments:
+    pk -- the primary key of the article object
+    slug -- the slug of the article object
+    """
     obj = get_object_or_404(Article, pk=pk)
     form = ArticleForm(request.POST or None, request.FILES or None,
                        instance=obj)
@@ -73,9 +85,9 @@ def update_article(request, pk, slug):
 
 class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Article
-    success_url = reverse_lazy('blog:home')
+    success_url = reverse_lazy('home')
 
 
 class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
-    success_url = reverse_lazy('blog:article_detail')
+    success_url = ('article_detail')
