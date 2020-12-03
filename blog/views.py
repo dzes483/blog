@@ -30,7 +30,7 @@ class ArticleCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-def article_detail(request, pk, slug):
+def article_detail(request, slug):
     """Displays a detailed view of an article and its comments, and allows an
     unauthenticated user to post a comment.
 
@@ -39,7 +39,7 @@ def article_detail(request, pk, slug):
     slug -- the slug of the article object
     """
     template_name = 'blog/article_detail.html'
-    article = get_object_or_404(Article, pk=pk)
+    article = get_object_or_404(Article, slug=slug)
     comments = article.comments.filter(active=True)
     request.session['num_comments'] = article.comments.all().count()
     num_comments = request.session['num_comments']
@@ -90,6 +90,6 @@ class ArticleDeleteView(LoginRequiredMixin, DeleteView):
 
 class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
-
-    def get_success_url():
-        pass
+    def get_success_url(self):
+        article = Article.objects.get(slug=self.object.article.slug)
+        return article.get_absolute_url()
