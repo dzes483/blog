@@ -19,10 +19,16 @@ from blog import views
 
 urlpatterns = [
     path('', views.ArticleList.as_view(), name='home'),
-    path('article/<int:pk>/<str:slug>/', views.article_detail,
+    path('blog/<str:slug>/', views.article_detail,
          name='article_detail'),
-    path('article/<int:pk>/<str:slug>/update/',
+    path('blog/<str:slug>/update/',
          views.update_article, name='update_article'),
-    path('article/create/', views.ArticleCreateView.as_view(),
-         name='article_create')
+    path('blog/create/', views.ArticleCreateView.as_view(),
+         name='article_create'),
+    path('blog/<str:slug>/delete/',
+         views.ArticleDeleteView.as_view(),
+         name='delete_article'),
+    path('blog/<str:slug>/comment/<int:pk>/delete',
+         views.CommentDeleteView.as_view(),
+         name='delete_comment'),
 ]
