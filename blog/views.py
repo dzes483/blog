@@ -79,7 +79,7 @@ def update_article(request, pk, slug):
     if request.method == 'POST':
         if form.is_valid():
            form.save()
-           return redirect('article_detail', pk=pk, slug=slug)
+           return redirect('article_detail', slug=slug)
     return render(request, 'blog/article_update_form.html', {'form': form})
 
 
@@ -90,4 +90,6 @@ class ArticleDeleteView(LoginRequiredMixin, DeleteView):
 
 class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Comment
-    success_url = ('article_detail')
+
+    def get_success_url():
+        pass
