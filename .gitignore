@@ -1,3 +1,6 @@
 .env
 manage.py
 coffeelover/settings.py
+coffeelover/__pycache__
+coffeelover/asgi.py
+coffeelover/__init__.py
