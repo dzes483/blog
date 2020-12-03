@@ -4,3 +4,6 @@ coffeelover/settings.py
 coffeelover/__pycache__
 coffeelover/asgi.py
 coffeelover/__init__.py
+blog/__pycache__
+blog/migrations
+__init__.py
