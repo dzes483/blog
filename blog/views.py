@@ -1,16 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Comment
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from blog.forms import CommentForm, ArticleForm
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, \
+                                 UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 
+# Apps
+from .models import Article, Comment
+from blog.forms import CommentForm, ArticleForm
+
+
 class ArticleList(ListView):
+    """
+    Displays all articles, with the newest at the top.
+    """
     queryset = Article.objects.order_by('-date_posted')
     template_name = 'blog/index.html'
+    ## # TODO: Paginate
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(CreateView, LoginRequiredMixin):
+    """
+    Creates a new article with the logged-in user as the default author.
+    """
     model = Article
     fields = ['title','body', 'image']
     template_name_suffix = '_create_form'
@@ -57,13 +68,8 @@ def update_article(request, pk, slug):
         if form.is_valid():
            form.save()
            return redirect('article_detail', pk=pk, slug=slug)
-    return render(request, 'blog/article_update.html', {'form': form})
+    return render(request, 'blog/article_update_form.html', {'form': form})
 
-class ArticleUpdateView(UpdateView):
-    model = Article
-    template_name = 'blog/article_update.html'
-    form_class = ArticleForm
-    success_url = 'article_detail'
 
 class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Article
