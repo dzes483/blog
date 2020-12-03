@@ -3,7 +3,12 @@
 <p>Hello</p>
 <h1>{{ article.title }}</h1>
 {% if user.is_authenticated %}
-  <a href="{% url 'update_article' pk=article.pk slug=article.slug %}">Edit article</a>
+  <a href="{% url 'update_article' pk=article.pk slug=article.slug %}">
+    Edit article
+  </a>
+  <a href="{% url 'delete_article' pk=article.pk slug=article.slug %}">
+    Delete article
+  </a>
 {% endif %}
 <p>{{ article.date_posted }}</p>
 <p>{{ article.last_modified }}</p>
@@ -13,6 +18,9 @@
   <p>{{ comment.name }}</p>
   <p>{{ comment.body }}</p>
   <p>{{ comment.date_posted }}</p>
+  {% if user.is_authenticated %}
+  <a href="{% url 'delete_comment' pk_1=article.pk slug=article.slug pk_2=comment.pk %}">Delete</a>
+  {% endif %}
 {% endfor %}
 
 <form method="POST">
