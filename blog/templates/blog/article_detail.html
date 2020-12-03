@@ -3,10 +3,10 @@
 <p>Hello</p>
 <h1>{{ article.title }}</h1>
 {% if user.is_authenticated %}
-  <a href="{% url 'update_article' pk=article.pk slug=article.slug %}">
+  <a href="{% url 'update_article' slug=article.slug %}">
     Edit article
   </a>
-  <a href="{% url 'delete_article' pk=article.pk slug=article.slug %}">
+  <a href="{% url 'delete_article' slug=article.slug %}">
     Delete article
   </a>
 {% endif %}
@@ -19,7 +19,7 @@
   <p>{{ comment.body }}</p>
   <p>{{ comment.date_posted }}</p>
   {% if user.is_authenticated %}
-  <a href="{% url 'delete_comment' pk_1=article.pk slug=article.slug pk_2=comment.pk %}">Delete</a>
+  <a href="{% url 'delete_comment' slug=article.slug pk=comment.pk %}">Delete</a>
   {% endif %}
 {% endfor %}
 
